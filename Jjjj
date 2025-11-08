@@ -1,0 +1,65 @@
+-- 🧩 Interfaz creada por Jean con IA 🧠
+
+local player = game.Players.LocalPlayer
+local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+gui.Name = "ColorMenu"
+
+-- 🌈 Menú principal
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 300, 0, 200)
+mainFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
+mainFrame.BackgroundColor3 = Color3.fromRGB(255, 100, 150)
+mainFrame.BorderSizePixel = 0
+mainFrame.Parent = gui
+
+-- 🌟 Texto del menú
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 40)
+title.BackgroundTransparency = 1
+title.Text = "🌈 Menú de Jean 🌈"
+title.TextColor3 = Color3.new(1, 1, 1)
+title.Font = Enum.Font.GothamBold
+title.TextScaled = true
+title.Parent = mainFrame
+
+-- ❌ Botón de cerrar
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 30, 0, 30)
+closeButton.Position = UDim2.new(1, -35, 0, 5)
+closeButton.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+closeButton.Text = "X"
+closeButton.TextColor3 = Color3.new(1, 1, 1)
+closeButton.Font = Enum.Font.SourceSansBold
+closeButton.TextScaled = true
+closeButton.Parent = mainFrame
+
+-- 🟥 Cuadro pequeño (se muestra al cerrar)
+local miniBox = Instance.new("Frame")
+miniBox.Size = UDim2.new(0, 50, 0, 50)
+miniBox.Position = UDim2.new(0.05, 0, 0.8, 0)
+miniBox.BackgroundColor3 = Color3.fromRGB(100, 255, 200)
+miniBox.Visible = false
+miniBox.Active = true
+miniBox.Draggable = true
+miniBox.Parent = gui
+
+local miniLabel = Instance.new("TextLabel")
+miniLabel.Size = UDim2.new(1, 0, 1, 0)
+miniLabel.BackgroundTransparency = 1
+miniLabel.Text = "🔲"
+miniLabel.TextScaled = true
+miniLabel.Parent = miniBox
+
+-- 🎬 Función para cerrar el menú
+closeButton.MouseButton1Click:Connect(function()
+	mainFrame.Visible = false
+	miniBox.Visible = true
+end)
+
+-- 🎬 Función para reabrir el menú
+miniBox.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		mainFrame.Visible = true
+		miniBox.Visible = false
+	end
+end)
